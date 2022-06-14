@@ -5,7 +5,7 @@ import { useState } from "react"
 import Header from "./components/Header/Header"
 import Instructions from "./components/Instructions/Instructions"
 import Chip from "./components/Chip/Chip"
-import NutritionLabel from "./components/NutritionalLabel/NutritionalLabel"
+import NutritionalLabel from "./components/NutritionalLabel/NutritionalLabel"
 
 import { createDataSet } from "./data/dataset"
 import "./App.css"
@@ -35,7 +35,7 @@ export function App() {
   // Constants to hold selections
   const [selectedCategory, setSelectedCategory] = useState()
   const [selectedRestaurant, setSelectedRestaurant] = useState()
-  const [selectedFood, setSelectedFood] = useState()
+  const [selectedFood, setSelectedFood] = useState([])
  
   var currentMenuItems = data.filter((current) => {
 
@@ -109,16 +109,16 @@ export function App() {
             <h2 className="title">Menu Items</h2>
             
             {
-              currentMenuItems.map((item) =>
+              currentMenuItems.map((item) => (
             <Chip
 
             label={item.item_name} key = {item.item_name}
 
             onClick={() => setSelectedFood(item)}
-            isActive={selectedFood && selectedFood.item_name === item.item_name}
+            isActive={selectedFood == item}
             />
 
-            )}
+            ))}
              
                       
             </div>
@@ -128,7 +128,7 @@ export function App() {
           <div className="NutritionFacts nutrition-facts">
             
               
-          {<NutritionLabel item={selectedFood} />}
+          {<NutritionalLabel item={selectedFood} />}
               
           </div>
         </div>
